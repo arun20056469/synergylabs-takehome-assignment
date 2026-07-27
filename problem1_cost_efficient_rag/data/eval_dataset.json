@@ -1,0 +1,20 @@
+[
+  {"id":"q01","question":"How many named users are included in the Starter plan?","ground_truth_answer":"15 named users","relevant_chunk_ids":["d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"]},
+  {"id":"q02","question":"Which plan includes SAML single sign-on?","ground_truth_answer":"Enterprise plan","relevant_chunk_ids":["d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"]},
+  {"id":"q03","question":"How long are deleted tickets retained?","ground_truth_answer":"30 days","relevant_chunk_ids":["d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"]},
+  {"id":"q04","question":"What encryption protects customer data at rest?","ground_truth_answer":"AES-256","relevant_chunk_ids":["5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"]},
+  {"id":"q05","question":"How long are security logs retained?","ground_truth_answer":"365 days","relevant_chunk_ids":["5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"]},
+  {"id":"q06","question":"What is the acknowledgement target for a confirmed severity-one incident?","ground_truth_answer":"30 minutes","relevant_chunk_ids":["5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"]},
+  {"id":"q07","question":"What must every production release have?","ground_truth_answer":"approved pull request, automated unit tests, and rollback plan","relevant_chunk_ids":["61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"]},
+  {"id":"q08","question":"What happens after a failed canary?","ground_truth_answer":"rolled back","relevant_chunk_ids":["61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"]},
+  {"id":"q09","question":"When is the standard change window?","ground_truth_answer":"Tuesday and Thursday between 09:00 and 16:00 UTC","relevant_chunk_ids":["61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"]},
+  {"id":"q10","question":"What support hours do Growth customers receive?","ground_truth_answer":"Monday through Friday, 08:00 to 18:00 UTC","relevant_chunk_ids":["4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"]},
+  {"id":"q11","question":"What is the initial response target for a Starter customer?","ground_truth_answer":"two-business-day","relevant_chunk_ids":["4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"]},
+  {"id":"q12","question":"What is the Enterprise critical incident response target?","ground_truth_answer":"one hour","relevant_chunk_ids":["543de9b247ced4a69a807de5c81570833678f98c03fe2fdcae30eb682ca3162c"]},
+  {"id":"q13","question":"How long are Starter workspace audit events stored?","ground_truth_answer":"90 days","relevant_chunk_ids":["c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"]},
+  {"id":"q14","question":"How long do administrators have to export a closed workspace?","ground_truth_answer":"30 days","relevant_chunk_ids":["c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"]},
+  {"id":"q15","question":"How long are data export files available?","ground_truth_answer":"14 days","relevant_chunk_ids":["c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"]},
+  {"id":"q16","question":"What is the default REST API rate limit?","ground_truth_answer":"600 requests per minute per workspace","relevant_chunk_ids":["3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"]},
+  {"id":"q17","question":"How often should API tokens be rotated?","ground_truth_answer":"every 90 days","relevant_chunk_ids":["3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"]},
+  {"id":"q18","question":"Which collaboration platforms are supported?","ground_truth_answer":"Slack and Microsoft Teams","relevant_chunk_ids":["3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"]}
+]

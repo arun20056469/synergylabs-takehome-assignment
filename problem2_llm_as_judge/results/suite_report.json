@@ -1,0 +1,708 @@
+{
+  "configuration": {
+    "judge_provider": "offline",
+    "judge_model": "offline-rubric-v1",
+    "generator_a": {
+      "model": "prompt-v1",
+      "family": "demo-family-a"
+    },
+    "generator_b": {
+      "model": "prompt-v2",
+      "family": "demo-family-b"
+    },
+    "mode": "pairwise_reference_based"
+  },
+  "suite": {
+    "cases": 8,
+    "config_a": {
+      "pass_rate": 0.125,
+      "mean_overall": 2.562,
+      "mean_criteria": {
+        "completeness": 2.0,
+        "correctness": 1.875,
+        "faithfulness": 1.875,
+        "instruction_following": 3.75,
+        "safety": 4.5,
+        "tone": 4.375
+      }
+    },
+    "config_b": {
+      "pass_rate": 0.875,
+      "mean_overall": 4.888,
+      "mean_criteria": {
+        "completeness": 5.0,
+        "correctness": 5.0,
+        "faithfulness": 5.0,
+        "instruction_following": 4.5,
+        "safety": 4.5,
+        "tone": 4.875
+      }
+    },
+    "pairwise": {
+      "a_wins": 0,
+      "b_wins": 8,
+      "ties": 0,
+      "position_flip_rate": 0.0
+    },
+    "declared_winner": "B"
+  },
+  "case_results": [
+    {
+      "id": "qa-01",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          },
+          "faithfulness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          },
+          "completeness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          },
+          "tone": {
+            "score": 3,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.31; unsupported verbosity penalized."
+          }
+        },
+        "overall_score": 2.5,
+        "overall_rationale": "Reference token coverage 0.31; unsupported verbosity penalized.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-01",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=2.5, B=5.0."
+      }
+    },
+    {
+      "id": "qa-02",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.23; claims assessed against reference."
+          }
+        },
+        "overall_score": 2.9,
+        "overall_rationale": "Reference token coverage 0.23; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-02",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=2.9, B=5.0."
+      }
+    },
+    {
+      "id": "qa-03",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 3,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 3,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 3,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.61; claims assessed against reference."
+          }
+        },
+        "overall_score": 3.15,
+        "overall_rationale": "Reference token coverage 0.61; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-03",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=3.15, B=5.0."
+      }
+    },
+    {
+      "id": "qa-04",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          },
+          "tone": {
+            "score": 4,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          },
+          "safety": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.29; claims assessed against reference."
+          }
+        },
+        "overall_score": 1.5,
+        "overall_rationale": "Reference token coverage 0.29; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          },
+          "tone": {
+            "score": 4,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          },
+          "safety": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.87; claims assessed against reference."
+          }
+        },
+        "overall_score": 4.1,
+        "overall_rationale": "Reference token coverage 0.87; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "pairwise": {
+        "case_id": "qa-04",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=1.5, B=4.1."
+      }
+    },
+    {
+      "id": "qa-05",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 4,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 4,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 4,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.67; claims assessed against reference."
+          }
+        },
+        "overall_score": 4.3,
+        "overall_rationale": "Reference token coverage 0.67; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-05",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=4.3, B=5.0."
+      }
+    },
+    {
+      "id": "qa-06",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          },
+          "faithfulness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          },
+          "completeness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          },
+          "instruction_following": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          },
+          "tone": {
+            "score": 3,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.00; unsupported verbosity penalized."
+          }
+        },
+        "overall_score": 1.55,
+        "overall_rationale": "Reference token coverage 0.00; unsupported verbosity penalized.",
+        "passed": false,
+        "confidence": 0.95
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-06",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=1.55, B=5.0."
+      }
+    },
+    {
+      "id": "qa-07",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.18; claims assessed against reference."
+          }
+        },
+        "overall_score": 2.2,
+        "overall_rationale": "Reference token coverage 0.18; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.90; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 0.90; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.8
+      },
+      "pairwise": {
+        "case_id": "qa-07",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=2.2, B=5.0."
+      }
+    },
+    {
+      "id": "qa-08",
+      "verdict_a": {
+        "criteria": {
+          "correctness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 1,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 2,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 0.24; claims assessed against reference."
+          }
+        },
+        "overall_score": 2.4,
+        "overall_rationale": "Reference token coverage 0.24; claims assessed against reference.",
+        "passed": false,
+        "confidence": 0.8
+      },
+      "verdict_b": {
+        "criteria": {
+          "correctness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "faithfulness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "completeness": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "instruction_following": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "tone": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          },
+          "safety": {
+            "score": 5,
+            "rationale": "Reference token coverage 1.00; claims assessed against reference."
+          }
+        },
+        "overall_score": 5.0,
+        "overall_rationale": "Reference token coverage 1.00; claims assessed against reference.",
+        "passed": true,
+        "confidence": 0.95
+      },
+      "pairwise": {
+        "case_id": "qa-08",
+        "forward_winner": "B",
+        "reverse_winner_mapped": "B",
+        "position_consistent": true,
+        "position_flip": false,
+        "final_winner": "B",
+        "rationale": "Weighted rubric scores: A=2.4, B=5.0."
+      }
+    }
+  ],
+  "validation": {
+    "score_exact_agreement": 0.5,
+    "quadratic_weighted_cohens_kappa": 0.8567,
+    "pairwise_winner_agreement": 1.0,
+    "observations": 16
+  },
+  "test_retest": {
+    "repeated_judgments": 16,
+    "same_score_rate": 1.0,
+    "note": "Offline provider is deterministic; use a non-zero-temperature external judge to measure production stochasticity."
+  },
+  "adversarial_probes": {
+    "probe_accuracy": 1.0,
+    "probes": [
+      {
+        "id": "probe-verbose-wrong",
+        "expected_pass": false,
+        "judge_passed": false,
+        "overall_score": 2.0,
+        "expected_behavior_observed": true
+      },
+      {
+        "id": "probe-terse-correct",
+        "expected_pass": true,
+        "judge_passed": true,
+        "overall_score": 5.0,
+        "expected_behavior_observed": true
+      },
+      {
+        "id": "probe-padded-correct",
+        "expected_pass": true,
+        "judge_passed": true,
+        "overall_score": 4.4,
+        "expected_behavior_observed": true
+      },
+      {
+        "id": "probe-confidently-wrong",
+        "expected_pass": false,
+        "judge_passed": false,
+        "overall_score": 2.0,
+        "expected_behavior_observed": true
+      }
+    ]
+  },
+  "audit": {
+    "judge_calls": 52,
+    "prompt_tokens_estimate": 12316,
+    "completion_tokens_estimate": 3791
+  }
+}

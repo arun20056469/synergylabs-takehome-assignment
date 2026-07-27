@@ -1,0 +1,10 @@
+[
+  {"id":"qa-01", "human_score_a":3, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-02", "human_score_a":1, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-03", "human_score_a":2, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-04", "human_score_a":1, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-05", "human_score_a":3, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-06", "human_score_a":1, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-07", "human_score_a":2, "human_score_b":5, "human_winner":"B"},
+  {"id":"qa-08", "human_score_a":1, "human_score_b":5, "human_winner":"B"}
+]

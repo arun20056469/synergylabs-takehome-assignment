@@ -1,0 +1,13 @@
+judge:
+  provider: offline
+  model: offline-rubric-v1
+  temperature: 0.0
+generator_a:
+  model: prompt-v1
+  family: demo-family-a
+generator_b:
+  model: prompt-v2
+  family: demo-family-b
+comparison:
+  mode: pairwise_reference_based
+  require_order_agreement: true

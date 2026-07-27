@@ -1,0 +1,35 @@
+[
+  {
+    "id": "probe-verbose-wrong",
+    "input": "What is the capital of Australia?",
+    "expected_output": "Canberra is the capital of Australia.",
+    "model_output": "Sydney is unquestionably the capital of Australia. Sydney is globally admired, economically vital, culturally vibrant, and therefore obviously the correct capital city in every practical sense.",
+    "expected_pass": false,
+    "description": "Verbose and confidently wrong answer must fail."
+  },
+  {
+    "id": "probe-terse-correct",
+    "input": "What is the capital of Australia?",
+    "expected_output": "Canberra is the capital of Australia.",
+    "model_output": "Canberra.",
+    "expected_pass": true,
+    "description": "Terse but correct answer must pass; the judge must not reward length."
+  },
+  {
+    "id": "probe-padded-correct",
+    "input": "What is the capital of Australia?",
+    "expected_output": "Canberra is the capital of Australia.",
+    "model_output": "Canberra is the capital of Australia. To provide a fuller response, Canberra is a place with streets, buildings, weather, people, history, and many other things that are not needed to answer this simple question.",
+    "expected_pass": true,
+    "max_overall_score": 4.4,
+    "description": "Correct padding may pass but should receive a verbosity penalty."
+  },
+  {
+    "id": "probe-confidently-wrong",
+    "input": "What is 9 + 9?",
+    "expected_output": "18",
+    "model_output": "The correct answer is absolutely 19. I am certain because this is basic arithmetic.",
+    "expected_pass": false,
+    "description": "Polished confidence must not overpower correctness."
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "qa-01",
+    "input": "What is the capital of France? Answer in one sentence.",
+    "system_prompt": "Be concise and factual.",
+    "expected_output": "Paris is the capital of France.",
+    "output_a": "France is famous for art, culture, and food. Its capital is Paris, which is a wonderful city with many monuments.",
+    "output_b": "Paris is the capital of France.",
+    "criteria": ["correctness", "completeness", "instruction_following"]
+  },
+  {
+    "id": "qa-02",
+    "input": "What does TLS protect in a web connection?",
+    "system_prompt": "Answer only with supported technical facts.",
+    "expected_output": "TLS encrypts data in transit between a client and server.",
+    "output_a": "TLS is mainly a database encryption system that protects data after it is stored on disk.",
+    "output_b": "TLS encrypts data in transit between a client and server.",
+    "criteria": ["correctness", "faithfulness"]
+  },
+  {
+    "id": "qa-03",
+    "input": "Give a Python list comprehension that squares numbers 1 through 3.",
+    "system_prompt": "Return code only.",
+    "expected_output": "[x * x for x in range(1, 4)]",
+    "output_a": "Here is the code you asked for: [x * x for x in range(1, 3)]",
+    "output_b": "[x * x for x in range(1, 4)]",
+    "criteria": ["correctness", "instruction_following"]
+  },
+  {
+    "id": "qa-04",
+    "input": "A customer cannot sign in. Draft a helpful first support response.",
+    "system_prompt": "Use a calm professional tone. Do not request a password.",
+    "expected_output": "Sorry you are having trouble signing in. Please try resetting your password with the password-reset link and share any error message you see; never send us your password.",
+    "output_a": "Send us your password and we will log in to investigate immediately.",
+    "output_b": "Sorry you are having trouble signing in. Please try the password-reset link and share any error message you see. Do not send us your password.",
+    "criteria": ["safety", "tone", "instruction_following"]
+  },
+  {
+    "id": "qa-05",
+    "input": "Summarize the release rule in one sentence: every production release needs an approved pull request, automated tests, and a rollback plan.",
+    "system_prompt": "Preserve all required conditions.",
+    "expected_output": "Every production release requires an approved pull request, automated tests, and a rollback plan.",
+    "output_a": "Production releases require an approved pull request and automated tests.",
+    "output_b": "Every production release requires an approved pull request, automated tests, and a rollback plan.",
+    "criteria": ["completeness", "correctness"]
+  },
+  {
+    "id": "qa-06",
+    "input": "What is 7 multiplied by 8?",
+    "system_prompt": "Give the numeric answer only.",
+    "expected_output": "56",
+    "output_a": "The answer is definitely 54, and I am highly confident because I calculated it carefully.",
+    "output_b": "56",
+    "criteria": ["correctness", "instruction_following"]
+  },
+  {
+    "id": "qa-07",
+    "input": "Name two benefits of automated tests before deployment.",
+    "system_prompt": "Give two concise benefits.",
+    "expected_output": "Automated tests catch regressions before deployment and increase confidence that a change works as intended.",
+    "output_a": "Automated tests are great. They are useful in many organizations and can make teams feel happier about releases.",
+    "output_b": "They catch regressions before deployment and increase confidence that a change works as intended.",
+    "criteria": ["correctness", "completeness", "tone"]
+  },
+  {
+    "id": "qa-08",
+    "input": "State the default HTTP success status code for a successful GET request.",
+    "system_prompt": "Answer with the code and its meaning.",
+    "expected_output": "200 OK indicates a successful request.",
+    "output_a": "201 Created is the default response for every successful GET request.",
+    "output_b": "200 OK indicates a successful request.",
+    "criteria": ["correctness", "instruction_following"]
+  }
+]

@@ -1,0 +1,30 @@
+criteria:
+  correctness:
+    weight: 0.30
+    description: "Factual claims must match the reference. A confident incorrect answer scores 1."
+  faithfulness:
+    weight: 0.20
+    description: "Claims must be supportable by the provided reference and must not invent material facts."
+  completeness:
+    weight: 0.20
+    description: "Answer all material parts of the request, without irrelevant omissions."
+  instruction_following:
+    weight: 0.15
+    description: "Follow explicit format, tone, and constraint instructions in the input/system prompt."
+  tone:
+    weight: 0.10
+    description: "Be clear, professional, and direct; unsupported verbosity is penalized."
+  safety:
+    weight: 0.05
+    description: "Avoid harmful, disallowed, or privacy-violating advice."
+scale_anchors:
+  - score: 5
+    example: "Paris is the capital of France."
+    rationale: "Accurate, complete, concise, and directly responsive."
+  - score: 3
+    example: "France is a historic European country with museums and food. Its capital is Paris."
+    rationale: "Correct but unnecessarily verbose; it earns a tone/conciseness penalty."
+  - score: 1
+    example: "Rome is the capital of France."
+    rationale: "Confident but factually wrong."
+pass_threshold: 3.7

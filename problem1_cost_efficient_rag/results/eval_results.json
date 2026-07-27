@@ -1,0 +1,353 @@
+{
+  "run_configuration": {
+    "top_k": 3,
+    "vector_backend": "sqlite-vec",
+    "embedding_model": "hashing-tfidf-384",
+    "embedding_dimensions": 384,
+    "dataset_questions": 18,
+    "stored_chunks": 11
+  },
+  "ingestion_idempotence": {
+    "first_run": {
+      "documents": 6,
+      "inserted_chunks": 0,
+      "skipped_existing_chunks": 11,
+      "stored_chunks": 11,
+      "chunk_size": 450,
+      "chunk_overlap": 60
+    },
+    "second_run": {
+      "documents": 6,
+      "inserted_chunks": 0,
+      "skipped_existing_chunks": 11,
+      "stored_chunks": 11,
+      "chunk_size": 450,
+      "chunk_overlap": 60
+    }
+  },
+  "retrieval_metrics": {
+    "recall_at_3": 1.0,
+    "hit_rate_at_3": 1.0,
+    "mrr": 0.9444,
+    "ndcg_at_3": 0.959,
+    "context_precision_at_3": 0.3333
+  },
+  "answer_metrics": {
+    "exact_match_contains_gold": 0.7778,
+    "token_f1": 0.3425,
+    "faithfulness_citation_lexical": 1.0,
+    "answer_relevance_lexical": 0.6123
+  },
+  "latency_ms": {
+    "retrieval_p50": 4.5,
+    "retrieval_p95": 6.168
+  },
+  "per_question": [
+    {
+      "id": "q01",
+      "retrieved_ids": [
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1",
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d",
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"
+      ],
+      "relevant_chunk_ids": [
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "answer": "The Starter plan includes 15 named users, a shared inbox, and 5 GB of attachment storage. [Doc: data/raw_documents/product_overview.md, Chunk: d9521346fcdc]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.3157894736842105,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5,
+      "retrieval_latency_ms": 11.578
+    },
+    {
+      "id": "q02",
+      "retrieved_ids": [
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1",
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d",
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"
+      ],
+      "relevant_chunk_ids": [
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "answer": "The Enterprise plan adds unlimited named users, SAML single sign-on, and a dedicated success manager. [Doc: data/raw_documents/product_overview.md, Chunk: d9521346fcdc]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.2222222222222222,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7143,
+      "retrieval_latency_ms": 6.168
+    },
+    {
+      "id": "q03",
+      "retrieved_ids": [
+        "027ef39da07e0035df5e3f518c9417c1d39218e8f2ea1d3ba20bfbd0545f830d",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1",
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "relevant_chunk_ids": [
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "answer": "AuroraDesk retains deleted tickets for 30 days before permanent deletion. [Doc: data/raw_documents/product_overview.md, Chunk: 027ef39da07e]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.33333333333333337,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.3333,
+      "retrieval_latency_ms": 4.636
+    },
+    {
+      "id": "q04",
+      "retrieved_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "9a23448c07b8a8eef47506083eadac8c2bd9137970b446597ce76d601c232223"
+      ],
+      "relevant_chunk_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"
+      ],
+      "answer": "# Security controls AuroraDesk encrypts customer data in transit with TLS 1.2 or higher and at rest with AES-256. [Doc: data/raw_documents/security_controls.md, Chunk: 5f03e8f89a96]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.18181818181818182,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5714,
+      "retrieval_latency_ms": 4.249
+    },
+    {
+      "id": "q05",
+      "retrieved_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "027ef39da07e0035df5e3f518c9417c1d39218e8f2ea1d3ba20bfbd0545f830d",
+        "5e3cbc1a100590b78e4454d5398097a400acf1d9e24101680e0996cc98b606d4"
+      ],
+      "relevant_chunk_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"
+      ],
+      "answer": "Security logs are retained for 365 days. [Doc: data/raw_documents/security_controls.md, Chunk: 5f03e8f89a96]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.4444444444444445,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.6667,
+      "retrieval_latency_ms": 4.466
+    },
+    {
+      "id": "q06",
+      "retrieved_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "5e3cbc1a100590b78e4454d5398097a400acf1d9e24101680e0996cc98b606d4",
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"
+      ],
+      "relevant_chunk_ids": [
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"
+      ],
+      "answer": "The incident response target is to acknowledge a confirmed severity-one incident within 30 minutes. [Doc: data/raw_documents/security_controls.md, Chunk: 5f03e8f89a96]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.23529411764705882,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7273,
+      "retrieval_latency_ms": 4.698
+    },
+    {
+      "id": "q07",
+      "retrieved_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51",
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "relevant_chunk_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"
+      ],
+      "answer": "# Engineering release process Every production release requires an approved pull request, automated unit tests, and a rollback plan. [Doc: data/raw_documents/engineering_release.md, Chunk: 61d6504093ed]",
+      "answer_exact_match": 0.0,
+      "answer_f1": 0.6666666666666666,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5,
+      "retrieval_latency_ms": 4.5
+    },
+    {
+      "id": "q08",
+      "retrieved_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1",
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"
+      ],
+      "relevant_chunk_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"
+      ],
+      "answer": "A failed canary is rolled back before it reaches all customers. [Doc: data/raw_documents/engineering_release.md, Chunk: 61d6504093ed]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.3076923076923077,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5,
+      "retrieval_latency_ms": 5.524
+    },
+    {
+      "id": "q09",
+      "retrieved_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51",
+        "68dc399233da2f7ed193354db27c5e98bb8974367094904d797ebd1acad43f5e",
+        "9a23448c07b8a8eef47506083eadac8c2bd9137970b446597ce76d601c232223"
+      ],
+      "relevant_chunk_ids": [
+        "61d6504093ed6a5bcf1e5fb95317828eecd6749dafdfead456f5e608fdc44b51"
+      ],
+      "answer": "The standard change window is Tuesday and Thursday between 09:00 and 16:00 UTC. [Doc: data/raw_documents/engineering_release.md, Chunk: 61d6504093ed]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.8,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.8333,
+      "retrieval_latency_ms": 4.762
+    },
+    {
+      "id": "q10",
+      "retrieved_ids": [
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df",
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "relevant_chunk_ids": [
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"
+      ],
+      "answer": "Growth customers receive support Monday through Friday, 08:00 to 18:00 UTC. [Doc: data/raw_documents/support_sla.html, Chunk: 4c92d54aa3fa]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.8181818181818181,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5714,
+      "retrieval_latency_ms": 4.628
+    },
+    {
+      "id": "q11",
+      "retrieved_ids": [
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df",
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "relevant_chunk_ids": [
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"
+      ],
+      "answer": "The initial target response time for an Enterprise critical incident is one [Doc: data/raw_documents/support_sla.html, Chunk: 4c92d54aa3fa]",
+      "answer_exact_match": 0.0,
+      "answer_f1": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.6,
+      "retrieval_latency_ms": 4.526
+    },
+    {
+      "id": "q12",
+      "retrieved_ids": [
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df",
+        "543de9b247ced4a69a807de5c81570833678f98c03fe2fdcae30eb682ca3162c",
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095"
+      ],
+      "relevant_chunk_ids": [
+        "543de9b247ced4a69a807de5c81570833678f98c03fe2fdcae30eb682ca3162c"
+      ],
+      "answer": "The initial target response time for an Enterprise critical incident is one [Doc: data/raw_documents/support_sla.html, Chunk: 4c92d54aa3fa]",
+      "answer_exact_match": 0.0,
+      "answer_f1": 0.14285714285714285,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.875,
+      "retrieval_latency_ms": 4.073
+    },
+    {
+      "id": "q13",
+      "retrieved_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1",
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df"
+      ],
+      "relevant_chunk_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "answer": "# Data retention policy Workspace audit events are stored for 365 days on the Growth and Enterprise plans and for 90 days on the Starter plan. [Doc: data/raw_documents/policy_data_retention.md, Chunk: c1d265cc8768]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.14814814814814814,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.75,
+      "retrieval_latency_ms": 4.352
+    },
+    {
+      "id": "q14",
+      "retrieved_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d",
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "relevant_chunk_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "answer": "When a workspace is closed, administrators have 30 days to export its content before the workspace is permanently removed. [Doc: data/raw_documents/policy_data_retention.md, Chunk: c1d265cc8768]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.1904761904761905,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7,
+      "retrieval_latency_ms": 4.167
+    },
+    {
+      "id": "q15",
+      "retrieved_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d",
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "9a23448c07b8a8eef47506083eadac8c2bd9137970b446597ce76d601c232223"
+      ],
+      "relevant_chunk_ids": [
+        "c1d265cc87684afa2ae3bada7ff3f87933b2ba41ae8805f5e736599140409b8d"
+      ],
+      "answer": "Data export files are available for download for 14 days. [Doc: data/raw_documents/policy_data_retention.md, Chunk: c1d265cc8768]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.33333333333333337,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7143,
+      "retrieval_latency_ms": 4.061
+    },
+    {
+      "id": "q16",
+      "retrieved_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "5f03e8f89a962518122b2cbfde475c45e61f34121d41c5b42548b62998ca0095",
+        "9a23448c07b8a8eef47506083eadac8c2bd9137970b446597ce76d601c232223"
+      ],
+      "relevant_chunk_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"
+      ],
+      "answer": "The REST API uses bearer tokens and has a default rate limit of 600 requests per minute per workspace. [Doc: data/raw_documents/general_integrations.md, Chunk: 3cd184741b27]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.4799999999999999,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.75,
+      "retrieval_latency_ms": 4.481
+    },
+    {
+      "id": "q17",
+      "retrieved_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "68dc399233da2f7ed193354db27c5e98bb8974367094904d797ebd1acad43f5e",
+        "9a23448c07b8a8eef47506083eadac8c2bd9137970b446597ce76d601c232223"
+      ],
+      "relevant_chunk_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"
+      ],
+      "answer": "API tokens should be rotated every 90 days. [Doc: data/raw_documents/general_integrations.md, Chunk: 3cd184741b27]",
+      "answer_exact_match": 1.0,
+      "answer_f1": 0.5454545454545454,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7143,
+      "retrieval_latency_ms": 4.582
+    },
+    {
+      "id": "q18",
+      "retrieved_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0",
+        "4c92d54aa3fa240a6bf449004812ed5f43620d1487bc4f4ed3f33897c51050df",
+        "d9521346fcdcdb1ff3fe80f445b2e8a23ea047a35c7ef81f3cf05e1ccb42cfb1"
+      ],
+      "relevant_chunk_ids": [
+        "3cd184741b27feb0ce149828f2bc622666673172c373cae33ee5949c2dc936c0"
+      ],
+      "answer": "I do not have sufficient information in the provided context to answer this question.",
+      "answer_exact_match": 0.0,
+      "answer_f1": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.0,
+      "retrieval_latency_ms": 4.082
+    }
+  ]
+}
