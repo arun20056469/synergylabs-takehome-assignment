@@ -37,27 +37,38 @@ class SQLiteVectorStore:
 
     def __init__(self, path: Path, embedder: HashingEmbedder) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        self.path, self.embedder = path, embedder
+        self.path = path
+        self.embedder = embedder
         self._sqlite_vec = None
         self.using_sqlite_vec = False
+
         try:
             import sqlite_vec
             self._sqlite_vec = sqlite_vec
         except ImportError:
-            pass
+            self._sqlite_vec = None
+
         self._initialize()
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.path)
         connection.row_factory = sqlite3.Row
+
         if self._sqlite_vec is not None:
             try:
-                connection.enable_load_extension(True)
-                self._sqlite_vec.load(connection)
-                connection.enable_load_extension(False)
-            except sqlite3.Error:
-                # Keep the implementation usable in restricted environments, but surface the fallback in health/README.
+                # Render and some Python builds don't support loading SQLite extensions.
+                if hasattr(connection, "enable_load_extension"):
+                    connection.enable_load_extension(True)
+                    self._sqlite_vec.load(connection)
+                    connection.enable_load_extension(False)
+                else:
+                    print("SQLite extension loading is unavailable. Falling back to normal SQLite.")
+                    self._sqlite_vec = None
+
+            except (sqlite3.Error, AttributeError, Exception):
+                print("sqlite-vec could not be loaded. Falling back to normal SQLite.")
                 self._sqlite_vec = None
+
         return connection
 
     def _initialize(self) -> None:
@@ -76,113 +87,267 @@ class SQLiteVectorStore:
                   embedding_dimensions INTEGER NOT NULL,
                   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
                 );
-                CREATE INDEX IF NOT EXISTS idx_chunks_category ON chunks(category);
-                CREATE INDEX IF NOT EXISTS idx_chunks_source ON chunks(source);
+
+                CREATE INDEX IF NOT EXISTS idx_chunks_category
+                ON chunks(category);
+
+                CREATE INDEX IF NOT EXISTS idx_chunks_source
+                ON chunks(source);
                 """
             )
+
             if self._sqlite_vec is not None:
                 try:
-                    connection.execute(f"CREATE VIRTUAL TABLE IF NOT EXISTS chunk_vectors USING vec0(embedding float[{self.embedder.dimensions}])")
-                    indexed_rowids = {int(row[0]) for row in connection.execute("SELECT rowid FROM chunk_vectors")}
-                    for row in connection.execute("SELECT rowid, embedding FROM chunks"):
+                    connection.execute(
+                        f"""
+                        CREATE VIRTUAL TABLE IF NOT EXISTS chunk_vectors
+                        USING vec0(embedding float[{self.embedder.dimensions}])
+                        """
+                    )
+
+                    indexed_rowids = {
+                        int(row[0])
+                        for row in connection.execute(
+                            "SELECT rowid FROM chunk_vectors"
+                        )
+                    }
+
+                    for row in connection.execute(
+                        "SELECT rowid, embedding FROM chunks"
+                    ):
                         if int(row["rowid"]) not in indexed_rowids:
-                            connection.execute("INSERT INTO chunk_vectors(rowid, embedding) VALUES (?, ?)",
-                                               (int(row["rowid"]), self._sqlite_vec.serialize_float32(json.loads(row["embedding"]))))
+                            connection.execute(
+                                """
+                                INSERT INTO chunk_vectors(rowid, embedding)
+                                VALUES (?, ?)
+                                """,
+                                (
+                                    int(row["rowid"]),
+                                    self._sqlite_vec.serialize_float32(
+                                        json.loads(row["embedding"])
+                                    ),
+                                ),
+                            )
+
                     self.using_sqlite_vec = True
+
                 except sqlite3.Error:
                     self.using_sqlite_vec = False
+
             connection.commit()
 
     def upsert(self, chunks: Iterable[Chunk]) -> tuple[int, int]:
-        inserted = skipped = 0
+        inserted = 0
+        skipped = 0
+
         with closing(self._connect()) as connection:
             for chunk in chunks:
                 embedding = self.embedder.embed(chunk.text)
                 vector = json.dumps(embedding, separators=(",", ":"))
+
                 cursor = connection.execute(
                     """
-                    INSERT INTO chunks (id, source, file_type, category, chunk_index, text, embedding, embedding_model, embedding_dimensions)
+                    INSERT INTO chunks
+                    (id, source, file_type, category,
+                     chunk_index, text, embedding,
+                     embedding_model, embedding_dimensions)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT(id) DO NOTHING
                     """,
-                    (chunk.chunk_id, chunk.source, chunk.file_type, chunk.category, chunk.chunk_index,
-                     chunk.text, vector, self.embedder.model_name, self.embedder.dimensions),
+                    (
+                        chunk.chunk_id,
+                        chunk.source,
+                        chunk.file_type,
+                        chunk.category,
+                        chunk.chunk_index,
+                        chunk.text,
+                        vector,
+                        self.embedder.model_name,
+                        self.embedder.dimensions,
+                    ),
                 )
+
                 if cursor.rowcount:
                     if self.using_sqlite_vec and self._sqlite_vec is not None:
-                        rowid = connection.execute("SELECT rowid FROM chunks WHERE id = ?", (chunk.chunk_id,)).fetchone()[0]
-                        connection.execute("INSERT INTO chunk_vectors(rowid, embedding) VALUES (?, ?)",
-                                           (rowid, self._sqlite_vec.serialize_float32(embedding)))
+                        rowid = connection.execute(
+                            "SELECT rowid FROM chunks WHERE id = ?",
+                            (chunk.chunk_id,),
+                        ).fetchone()[0]
+
+                        connection.execute(
+                            """
+                            INSERT INTO chunk_vectors(rowid, embedding)
+                            VALUES (?, ?)
+                            """,
+                            (
+                                rowid,
+                                self._sqlite_vec.serialize_float32(embedding),
+                            ),
+                        )
+
                     inserted += 1
                 else:
                     skipped += 1
+
             connection.commit()
+
         return inserted, skipped
 
-    def search(self, query: str, top_k: int = 3, metadata_filter: dict[str, str] | None = None) -> list[dict[str, Any]]:
+    def search(
+        self,
+        query: str,
+        top_k: int = 3,
+        metadata_filter: dict[str, str] | None = None,
+    ) -> list[dict[str, Any]]:
+
         if top_k < 1:
             raise ValueError("top_k must be at least 1")
+
         metadata_filter = metadata_filter or {}
+
         allowed = {"category", "file_type", "source"}
+
         bad = set(metadata_filter) - allowed
+
         if bad:
-            raise ValueError(f"Unsupported metadata filter(s): {sorted(bad)}")
-        clauses, params = [], []
+            raise ValueError(
+                f"Unsupported metadata filter(s): {sorted(bad)}"
+            )
+
+        clauses = []
+        params = []
+
         for key, value in metadata_filter.items():
             clauses.append(f"{key} = ?")
             params.append(value)
+
         where = " WHERE " + " AND ".join(clauses) if clauses else ""
+
         query_vector = self.embedder.embed(query)
         query_terms = self._meaningful_terms(query)
+
         with closing(self._connect()) as connection:
-            rows = connection.execute("SELECT rowid AS sqlite_rowid, * FROM chunks" + where, params).fetchall()
+            rows = connection.execute(
+                "SELECT rowid AS sqlite_rowid, * FROM chunks" + where,
+                params,
+            ).fetchall()
+
             if self.using_sqlite_vec and self._sqlite_vec is not None:
                 try:
-                    candidates = {int(row["rowid"]) for row in connection.execute(
-                        "SELECT rowid FROM chunk_vectors WHERE embedding MATCH ? AND k = ?",
-                        (self._sqlite_vec.serialize_float32(query_vector), max(50, top_k * 10)),
-                    )}
-                    filtered_rows = [row for row in rows if int(row["sqlite_rowid"]) in candidates]
+                    candidates = {
+                        int(row["rowid"])
+                        for row in connection.execute(
+                            """
+                            SELECT rowid
+                            FROM chunk_vectors
+                            WHERE embedding MATCH ?
+                            AND k = ?
+                            """,
+                            (
+                                self._sqlite_vec.serialize_float32(query_vector),
+                                max(50, top_k * 10),
+                            ),
+                        )
+                    }
+
+                    filtered_rows = [
+                        row
+                        for row in rows
+                        if int(row["sqlite_rowid"]) in candidates
+                    ]
+
                     if filtered_rows:
                         rows = filtered_rows
+
                 except sqlite3.Error:
                     self.using_sqlite_vec = False
+
         results = []
+
         for row in rows:
-            vector_similarity = sum(a * b for a, b in zip(query_vector, json.loads(row["embedding"])))
+            vector_similarity = sum(
+                a * b
+                for a, b in zip(
+                    query_vector,
+                    json.loads(row["embedding"]),
+                )
+            )
+
             document_terms = self._meaningful_terms(row["text"])
-            lexical_similarity = len(query_terms & document_terms) / len(query_terms) if query_terms else 0.0
-            # Hybrid lexical/vector score is transparent and prevents a hash collision from outranking direct evidence.
-            similarity = 0.30 * vector_similarity + 0.70 * lexical_similarity
+
+            lexical_similarity = (
+                len(query_terms & document_terms) / len(query_terms)
+                if query_terms
+                else 0.0
+            )
+
+            similarity = (
+                0.30 * vector_similarity +
+                0.70 * lexical_similarity
+            )
+
             record = dict(row)
+
             record.pop("embedding", None)
             record.pop("sqlite_rowid", None)
+
             record["score"] = round(similarity, 6)
             record["vector_score"] = round(vector_similarity, 6)
             record["lexical_score"] = round(lexical_similarity, 6)
+
             results.append(record)
-        return sorted(results, key=lambda item: item["score"], reverse=True)[:top_k]
+
+        return sorted(
+            results,
+            key=lambda item: item["score"],
+            reverse=True,
+        )[:top_k]
 
     @staticmethod
     def _meaningful_terms(text: str) -> set[str]:
-        stop_words = {"a", "an", "the", "and", "are", "as", "at", "be", "by", "do", "does", "for", "from", "how", "in", "is", "of", "on", "or", "that", "this", "to", "what", "when", "which", "who", "with"}
+        stop_words = {
+            "a", "an", "the", "and", "are", "as", "at", "be", "by",
+            "do", "does", "for", "from", "how", "in", "is", "of",
+            "on", "or", "that", "this", "to", "what", "when",
+            "which", "who", "with"
+        }
+
         terms = set()
+
         for token in re.findall(r"[a-z0-9]{2,}", text.lower()):
             if token in stop_words:
                 continue
+
             if token.endswith("tion") and len(token) > 6:
-                token = token[:-3] + "t"  # encryption -> encrypt
+                token = token[:-3] + "t"
             elif token.endswith("ed") and len(token) > 4:
                 token = token[:-2]
             elif token.endswith("s") and len(token) > 4:
                 token = token[:-1]
+
             terms.add(token)
+
         return terms
 
     def chunks_for_source(self, source: str) -> list[dict[str, Any]]:
         with closing(self._connect()) as connection:
-            return [dict(row) for row in connection.execute("SELECT * FROM chunks WHERE source = ? ORDER BY chunk_index", (source,))]
+            return [
+                dict(row)
+                for row in connection.execute(
+                    """
+                    SELECT *
+                    FROM chunks
+                    WHERE source = ?
+                    ORDER BY chunk_index
+                    """,
+                    (source,),
+                )
+            ]
 
     def count(self) -> int:
         with closing(self._connect()) as connection:
-            return int(connection.execute("SELECT COUNT(*) FROM chunks").fetchone()[0])
+            return int(
+                connection.execute(
+                    "SELECT COUNT(*) FROM chunks"
+                ).fetchone()[0]
+            )
