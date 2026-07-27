@@ -26,3 +26,4 @@ uvicorn problem1_cost_efficient_rag.src.api:app --reload --port 8000
 ```
 
 Detailed commands, environment variables, limitations, and evaluation discussion are in each project README.
+
